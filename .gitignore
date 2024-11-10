@@ -1,5 +1,7 @@
 # My added
 __pycache__/
+# migration files ignore for development purpose
+**/migrations/**
 /files/xl/**/*.xlsx
 /test/xl/**/*.xlsx
 /files/api/**/*.json
