@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from django.urls import path, include
+
+from friends_venture.views import health_check
+from friends_venture.views.home.views import *
+
 
 urlpatterns = [
+    path('', home, name='home'),
     path('admin/', admin.site.urls),
+    path('check/', health_check, name='health_check'),
 ]
