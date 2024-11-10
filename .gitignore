@@ -1,4 +1,5 @@
 # My added
+__pycache__/
 /files/xl/**/*.xlsx
 /test/xl/**/*.xlsx
 /files/api/**/*.json
