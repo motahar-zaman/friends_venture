@@ -1,2 +1,2 @@
-from .funcs import health_check
+from .funcs import *
 from .home.views import *
