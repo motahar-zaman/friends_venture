@@ -35,18 +35,3 @@ class CustomUser(AbstractUser):
 
     class Meta:
         db_table = 'User'
-
-
-class ClientReview(BaseModel):
-    # id = models.UUIDField(db_column='ClientReviewID', primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey('CustomUser', db_column='UserID', on_delete=models.CASCADE, related_name='user_reviews')
-    rating = models.DecimalField(db_column='Rating', max_digits=9, decimal_places=2, default=0)
-    comment = models.CharField(db_column='Comment', max_length=512, null=True, blank=True)
-    note = models.CharField(db_column='Note', max_length=256, null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        ordering = ['-created_at']
-        db_table = 'ClientReview'
