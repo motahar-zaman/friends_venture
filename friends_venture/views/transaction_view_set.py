@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from django.shortcuts import render
-from friends_venture.serealizers import PartnerSerializer
+from friends_venture.serealizers import TransactionSerializer
 from django.shortcuts import redirect
-from models.models.partners import Partner
+from models.models.transactions import Transaction
 from rest_framework import viewsets
 import ipdb
 
@@ -14,9 +14,9 @@ from rest_framework.status import (
 )
 
 
-class PartnerViewSet(viewsets.ModelViewSet):
-    model = Partner
-    serializer_class = PartnerSerializer
+class TransactionViewSet(viewsets.ModelViewSet):
+    model = Transaction
+    serializer_class = TransactionSerializer
     http_method_names = ["get", "head", "post", "patch", "update", "delete"]
 
     def get_queryset(self):
@@ -24,10 +24,10 @@ class PartnerViewSet(viewsets.ModelViewSet):
         return self.model.objects.filter(**fields.dict())
 
     def retrieve(self, request, *args, **kwargs):
-        store_configuration = self.get_object()
+        data = self.get_object()
 
-        serializer = self.serializer_class(store_configuration, context={"request": request})
-        return render(request, 'partner/partner.html', context={'partner': serializer.data})
+        serializer = self.serializer_class(data, context={"request": request})
+        return render(request, 'transactions/transaction.html', context={'partner': serializer.data})
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -36,7 +36,7 @@ class PartnerViewSet(viewsets.ModelViewSet):
         )
         data = serializer.data
 
-        return render(request, 'partner/partner.html', context={'partners': data})
+        return render(request, 'transactions/transaction.html', context={'partners': data})
 
     def create(self, request, *args, **kwargs):
         data = request.data

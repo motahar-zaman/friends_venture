@@ -1,21 +1,28 @@
 from rest_framework import serializers
-from models.models.partners import Partners
+from models.models.partners import Partner
+from models.models.transactions import Transaction
+import ipdb
 
-class PartnersSerializer(serializers.ModelSerializer):
+
+class PartnerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Partners
+        model = Partner
         fields = '__all__'
+        # fields = ('first_name', 'last_name', 'nick_name', 'email')
+
     # def to_representation(self, instance):
     #     data = super().to_representation(instance)
     #
     #     try:
-    #         data['stores'] = data['db_context']['Store']
+    #         ipdb.set_trace()
+    #         data['created_at'] = data['created_at'].strftime("%m/%d/%Y, %H:%M:%S")
     #     except KeyError:
-    #         data['stores'] = []
-    #
-    #     try:
-    #         data['course_providers'] = data['db_context']['CourseProvider']
-    #     except KeyError:
-    #         data['course_providers'] = []
+    #         pass
     #
     #     return data
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = '__all__'
