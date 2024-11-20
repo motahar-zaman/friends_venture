@@ -22,59 +22,64 @@
                 width: 100%
             }
         </style>
-        <h1>
-            this is the home page
-        </h1>
         <div>
-            <form style="margin-bottom: 10px" method="post" action="/partner/">
+            <form style="margin-bottom: 10px" method="post" action="/transaction/">
                 {% csrf_token %}
-                <label for="fname">First name:</label><br>
-                <input type="hidden" id="id" name="id">
-                <input type="text" id="fname" name="first_name"><br><br>
-                <label for="lname">Last name:</label><br>
-                <input type="text" id="lname" name="last_name"><br><br>
-                <label for="nname">Nick name:</label><br>
-                <input type="text" id="nname" name="nick_name"><br><br>
-                <label for="email">Email:</label><br>
-                <input type="text" id="email" name="email"><br><br>
-                <label for="phone_number">Phone No:</label><br>
-                <input type="text" id="phone_number" name="phone_number"><br><br>
-                <label for="alternate_number">Alternate No:</label><br>
-                <input type="text" id="alternate_number" name="alternate_contact_number"><br><br>
-                <label for="address">Address:</label><br>
-                <input type="text" id="address" name="address"><br><br>
+                <label for="partner">Partner Name:</label><br>
+                <select id="partner" name="partner" required>
+                    <option disabled selected value> -- select an option -- </option>
+                    {% for item in partners %}
+                    <option value="{{ item.id }}">{{ item.nick_name }}</option>
+                    {% endfor %}
+                </select>   <br><br>
+                <label for="type">Transaction Type:</label><br>
+                <select id="type" name="type" required>
+                    <option disabled selected value> -- select an option -- </option>
+                    <option value="credit">Credit</option>
+                    <option value="debit">Debit</option>
+                </select>   <br><br>
+                <label for="amount">Amount</label><br>
+                <input type="number" id="amount" name="amount" required><br><br>
+                <label for="date">Given Date</label><br>
+                <input type="date" id="date" name="date" required><br><br>
+                <label for="given_by">Given By</label><br>
+                <input type="text" id="given_by" name="given_by" required><br><br>
+                <label for="purpose">Purpose</label><br>
+                <input type="text" id="purpose" name="purpose"><br><br>
+                <label for="updated_by">Updated By:</label><br>
+                <input type="text" id="updated_by" name="updated_by" required><br><br>
                 <label for="note">Note:</label><br>
                 <input type="text" id="note" name="note"><br><br>
                 <input type="submit" value="Submit">
             </form>
             <table>
                 <tr>
-                    <th>Nick Name</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone No</th>
-                    <th>Address</th>
+                    <th>Partner Name</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Given By</th>
+                    <th>Purpose</th>
                     <th>Note</th>
-                    <th>Extra Info</th>
+                    <th>Updated By</th>
                     <th>Add Date</th>
                     <th>Action</th>
                 </tr>
-                {% for user in partners %}
+                {% for item in transactions %}
                 <tr>
-                    <td>{{user.nick_name}}</td>
-                    <td>{{user.first_name}}</td>
-                    <td>{{user.last_name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone_number}}</td>
-                    <td>{{user.address}}</td>
-                    <td>{{user.note}}</td>
-                    <td>{{user.missing_info}}</td>
-                    <td>{{user.created_at}}</td>
+                    <td>{{item.partner.first_name}} {{item.partner.last_name }}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.given_by}}</td>
+                    <td>{{item.purpose}}</td>
+                    <td>{{item.note}}</td>
+                    <td>{{item.updated_by}}</td>
+                    <td>{{item.created_at}}</td>
                     <td style="padding-left: 10px">
                         <a href="#" onclick="myFunction(); return false;">LINK</a>
                         <a style="color: green" href="javascript:editUser('user')"> Edit</a> <br>
-                        <a style="color: red" href="/delete_partner/{{user.id}}"> Delete</a>
+                        <a style="color: red" href=""> Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from django.shortcuts import render
-from friends_venture.serealizers import TransactionSerializer
+from friends_venture.serealizers import TransactionSerializer, PartnerSerializer
 from django.shortcuts import redirect
 from models.models.transactions import Transaction
+from models.models.partners import Partner
 from rest_framework import viewsets
 import ipdb
 
@@ -35,8 +36,13 @@ class TransactionViewSet(viewsets.ModelViewSet):
             queryset, many=True, context={"request": request}
         )
         data = serializer.data
+        # print(data[0].partner.nick_name)
+        print(data)
 
-        return render(request, 'transactions/transaction.html', context={'partners': data})
+        partners = Partner.objects.all()
+        partner_data = PartnerSerializer(partners, many=True).data
+
+        return render(request, 'transactions/transaction.html', context={'transactions': data, 'partners': partner_data})
 
     def create(self, request, *args, **kwargs):
         data = request.data
