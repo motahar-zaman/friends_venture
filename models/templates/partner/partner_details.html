@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Friends Venture</title>
+        <script>
+            function myFunction() {
+              document.getElementById("lname").value = "Paragraph changed.";
+            }
+        </script>
+    </head>
+    <body>
+        <style>
+            table, th, td {
+                border:1px solid black;
+<!--                margin-top: 1px;-->
+<!--                margin-right: 1px;-->
+<!--                margin-left: 1px;-->
+            }
+            table{
+                width: 100%
+            }
+        </style>
+        <div>
+            <table>
+                <tr>
+                    <th>Nick Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                    <th>Address</th>
+                    <th>Note</th>
+                    <th>Extra Info</th>
+                    <th>Add Date</th>
+                </tr>
+                <tr>
+                    <td>{{partner.nick_name}}</td>
+                    <td>{{partner.first_name}}</td>
+                    <td>{{partner.last_name}}</td>
+                    <td>{{partner.date_of_birth}}</td>
+                    <td>{{partner.email}}</td>
+                    <td>{{partner.phone_number}}</td>
+                    <td>{{partner.address}}</td>
+                    <td>{{partner.note}}</td>
+                    <td>{{partner.missing_info}}</td>
+                    <td>{{partner.created_at}}</td>
+                </tr>
+            </table> <br> <br>
+
+            <table>
+                <tr>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Given By</th>
+                    <th>Purpose</th>
+                    <th>Note</th>
+                    <th>Updated By</th>
+                    <th>Add Date</th>
+                </tr>
+                {% for item in partner.transactions %}
+                <tr>
+                    <td>{{item.type}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.given_by}}</td>
+                    <td>{{item.purpose}}</td>
+                    <td>{{item.note}}</td>
+                    <td>{{item.updated_by}}</td>
+                    <td>{{item.created_at}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    <script>
+        console.log('data')
+        function editUser(user) {
+            document.getElementById("lname").value = "Paragraph changed.";
+            console.log(user)
+            document.getElementById('id').value=user;
+        }
+    </script>
+    </body>
+</html>

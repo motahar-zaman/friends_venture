@@ -2,6 +2,7 @@ import ipdb
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from models.models.partners import Partner
+from friends_venture.serealizers import PartnerDetailSerializer
 
 
 from rest_framework.status import (
@@ -27,3 +28,15 @@ def delete_partner(request, *args, **kwargs):
     else:
         partner.delete()
     return redirect('/partner')
+
+
+def partner_details(request, *args, **kwargs):
+    data = None
+    try:
+        pid = kwargs.get('id', 0)
+        partner = Partner.objects.get(pk=pid)
+    except Exception as e:
+        print(e)
+    else:
+        data = PartnerDetailSerializer(partner).data
+    return render(request, 'partner/partner_details.html', context={'partner': data})

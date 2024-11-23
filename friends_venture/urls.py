@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from rest_framework import routers
 from django.urls import path, include
-
-from friends_venture.views import (health_check, delete_partner, home, PartnerViewSet, TransactionViewSet)
+from friends_venture.views import health_check, home, delete_partner, partner_details
+from friends_venture.views import PartnerViewSet, TransactionViewSet
 
 router = routers.DefaultRouter()
 
@@ -30,5 +30,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('check/', health_check, name='health_check'),
-    path('delete_partner/<id>', delete_partner, name='delete_partner'),
+    path('delete-partner/<id>', delete_partner, name='delete_partner'),
+    path('partner-details/<id>', partner_details, name='partner_details'),
 ]

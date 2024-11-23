@@ -22,9 +22,6 @@
                 width: 100%
             }
         </style>
-        <h1>
-            this is the home page
-        </h1>
         <div>
             <form style="margin-bottom: 10px" method="post" action="/partner/">
                 {% csrf_token %}
@@ -76,9 +73,9 @@
                     <td>{{user.missing_info}}</td>
                     <td>{{user.created_at}}</td>
                     <td style="padding-left: 10px">
-                        <a href="#" onclick="myFunction(); return false;">LINK</a>
+                        <a href="/partner-details/{{user.id}}">Details</a>
                         <a style="color: green" href="javascript:editUser('user')"> Edit</a> <br>
-                        <a style="color: red" href="/delete_partner/{{user.id}}"> Delete</a>
+                        <a style="color: red" href="/delete-partner/{{user.id}}"> Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
