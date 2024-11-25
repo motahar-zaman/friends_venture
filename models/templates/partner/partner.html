@@ -49,29 +49,31 @@
             <table>
                 <tr>
                     <th>Nick Name</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Birth Date</th>
+<!--                    <th>First Name</th>-->
+<!--                    <th>Last Name</th>-->
+<!--                    <th>Birth Date</th>-->
                     <th>Email</th>
                     <th>Phone No</th>
                     <th>Address</th>
-                    <th>Note</th>
-                    <th>Extra Info</th>
-                    <th>Add Date</th>
+                    <th>Current Balance</th>
+<!--                    <th>Note</th>-->
+<!--                    <th>Extra Info</th>-->
+<!--                    <th>Add Date</th>-->
                     <th>Action</th>
                 </tr>
                 {% for user in partners %}
                 <tr>
                     <td>{{user.nick_name}}</td>
-                    <td>{{user.first_name}}</td>
-                    <td>{{user.last_name}}</td>
-                    <td>{{user.date_of_birth}}</td>
+<!--                    <td>{{user.first_name}}</td>-->
+<!--                    <td>{{user.last_name}}</td>-->
+<!--                    <td>{{user.date_of_birth}}</td>-->
                     <td>{{user.email}}</td>
                     <td>{{user.phone_number}}</td>
                     <td>{{user.address}}</td>
-                    <td>{{user.note}}</td>
-                    <td>{{user.missing_info}}</td>
-                    <td>{{user.created_at}}</td>
+                    <td>{% if user.balance %} {{ user.balance }} {% else %} {{ 0 }} {% endif %}</td>
+<!--                    <td>{{user.note}}</td>-->
+<!--                    <td>{{user.missing_info}}</td>-->
+<!--                    <td>{{user.created_at}}</td>-->
                     <td style="padding-left: 10px">
                         <a href="/partner/{{user.id}}">Details</a>
                         <a style="color: green" href="javascript:editUser('user')"> Edit</a> <br>

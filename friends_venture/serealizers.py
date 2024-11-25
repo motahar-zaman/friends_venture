@@ -12,10 +12,17 @@ class PartnerSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
+        balance = 0
         try:
             data['created_at'] = instance.created_at.strftime("%d/%m/%Y, %H:%M:%S")
+            for item in instance.transactions.all():
+                if item.type == Transaction.DEBIT_TYPE:
+                    balance -= item.amount
+                else:
+                    balance += item.amount
         except KeyError:
             pass
+        data['balance'] = balance
 
         return data
 
