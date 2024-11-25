@@ -36,9 +36,6 @@ class TransactionViewSet(viewsets.ModelViewSet):
             queryset, many=True, context={"request": request}
         )
         data = serializer.data
-        # print(data[0].partner.nick_name)
-        print(data)
-
         partners = Partner.objects.all()
         partner_data = PartnerSerializer(partners, many=True).data
 

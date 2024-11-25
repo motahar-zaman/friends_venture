@@ -76,19 +76,21 @@
 <!--                    <td>{{user.created_at}}</td>-->
                     <td style="padding-left: 10px">
                         <a href="/partner/{{user.id}}">Details</a>
-                        <a style="color: green" href="javascript:editUser('user')"> Edit</a> <br>
-                        <a style="color: red" href="/delete-partner/{{user.id}}"> Delete</a>
+                        <a style="color: green" href=""> Edit</a>
+                        <button style="color: red" onclick="deletePartner({{user.id}})"> Delete</button>
                     </td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
     <script>
-        console.log('data')
-        function editUser(user) {
-            document.getElementById("lname").value = "Paragraph changed.";
-            console.log(user)
-            document.getElementById('id').value=user;
+        function deletePartner(id) {
+            if (confirm("Do you really want to delete this Partner! ??")) {
+                window.location.href='/delete-partner/'+id;
+            }
+            else {
+                txt = "Do whatever!";
+            }
         }
     </script>
     </body>
