@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from django.shortcuts import render
-from friends_venture.serealizers import PartnerSerializer
+from friends_venture.serealizers import PartnerSerializer, PartnerDetailSerializer
 from django.shortcuts import redirect
 from models.models.partners import Partner
 from rest_framework import viewsets
@@ -26,8 +26,8 @@ class PartnerViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         data = self.get_object()
 
-        serializer = self.serializer_class(data, context={"request": request})
-        return render(request, 'partner/partner.html', context={'partner': serializer.data})
+        serializer = PartnerDetailSerializer(data, context={"request": request})
+        return render(request, 'partner/partner_details.html', context={'partner': serializer.data})
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
